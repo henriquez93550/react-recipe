@@ -25,6 +25,18 @@ key=${API_KEY}&q=${recipeName}&count=10;`);
     this.setState({ recipes: data.recipes });
     console.log(this.state.recipes);
   }
+  // puts info on local storage
+  componentDidMount = () => {
+    const json = localStorage.getItem("recipes");
+    // recreates localStorage strings in to JSON
+    const recipes = JSON.parse(json);
+    this.setState({ recipes });
+  }
+  // keeps search results on page
+  componentDidUpdate = () => {
+    const recipes = JSON.stringify(this.state.recipes);
+    localStorage.setItem("recipes", recipes);
+  }
   render() {
     return (
       <div className="App">
